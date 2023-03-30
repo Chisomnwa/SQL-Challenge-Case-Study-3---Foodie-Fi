@@ -125,4 +125,5 @@ plan_id| event_2020 | event_2021
 The result shows there was no free trial in 2020. Maybe the old customers from 2020 continued with their subscriptions in 2021,
 customers upgraded from one paid trial to another, or customers signed up for paid plans without going through the trial plan.
 
+	A
 
