@@ -296,3 +296,123 @@ WHERE plan_id = 3 AND start_date <= '2020-12-31'
 
 * 195 customers upgraded to an annual plan in 2020
 
+---
+
+### 9. How many days on average does it take for a customer to upgrade to an annual plan from the day they join Foodie-Fi?
+
+* Assuming join date same as trial start date, fetch data for trial and annual plan separately
+* Use DATEDIFF to extract days from the difference between trial and annual start date
+* Use AVG to find the average length of days it takes to buy an annual plan.
+
+```sql
+-- Filter results to customers at trial plan = 0
+WITH trial_plan AS (
+	SELECT customer_id,
+	       start_date AS trial_date
+	FROM subscriptions
+	WHERE plan_id = 0
+),
+
+-- Filter results to customers on annual plan = 3
+annual_plan AS (
+	SELECT customer_id,
+	       start_date as annual_date
+	FROM subscriptions
+	WHERE plan_id = 3
+)
+
+-- Find the diffrence between the two dates
+SELECT ROUND(AVG(ABS(DATEDIFF(day, annual_date, trial_date))), 0) AS avg_days_to_upgrade
+FROM trial_plan tp
+JOIN annual_plan ap
+ON tp.customer_id = ap.customer_id;
+```
+	
+### Output:
+|avg_days_to_upgrade|
+| -- |
+|104|
+
+* On average, it takes 104 days for customers to upgrade to an annual plan after they join Foodie-Fi
+
+---
+
+### 10. Can you further break down this average value into 30 day periods (i.e. 0-30 days, 31-60 days etc)
+
+```sql
+WITH trial_plan AS (
+    SELECT customer_id, 
+	   start_date AS trial_date
+    FROM subscriptions
+    WHERE plan_id = 0
+),
+annual_plan AS (
+    SELECT customer_id,
+	   start_date as annual_date
+    FROM subscriptions
+    WHERE plan_id = 3
+)
+
+SELECT
+    CONCAT(FLOOR(DATEDIFF(day, trial_date, annual_date) / 30) * 30, '-', FLOOR(DATEDIFF(day, trial_date, annual_date) / 30) * 30 + 30, ' days') AS period,
+    COUNT(*) AS total_customers,
+    ROUND(AVG(DATEDIFF(day, trial_date, annual_date)), 0) AS avg_days_to_upgrade
+FROM trial_plan tp
+JOIN annual_plan ap ON tp.customer_id = ap.customer_id
+WHERE ap.annual_date IS NOT NULL
+GROUP BY FLOOR(DATEDIFF(day, trial_date, annual_date) / 30);
+```
+	
+### Output:
+period | total_customers | avg_days_to_upgrade
+-- | -- | --
+0 - 30 days  | 48 | 9
+30 - 60 days  | 25 | 41
+60 - 90 days  | 33 | 70
+90 - 120 days  | 35  | 99
+120 - 150 days  | 43  | 133
+150 - 180 days  | 35  | 161
+180 - 210 days  | 27  | 190
+210 - 240 days  | 4  | 240
+240 - 270 days  | 5  | 257
+270 - 300 days  | 1  | 285
+300 - 330 days  | 1  | 327
+330 - 360 days  | 1  | 346
+
+After a further breakdown, I found out:
+* Most often customers subscribe or upgrade to an annual plan within 0–30 days.
+* Fewer customers do so after 210 days.
+* After 270 days, almost no customers buy.
+
+---
+
+###  How many customers downgraded from a pro monthly to a basic monthly plan in 2020?
+
+### Steps:
+* Use the LEAD() function to get the next plan after their initial plan
+* COUNT the number of customers that dowgraded from pro monthly to basic monthly in 2020
+	
+```sql
+-- To retrieve the next plan start_date located in the next row based on the current row
+WITH next_plan_cte AS (
+SELECT customer_id,
+	   plan_id,
+	   start_date,
+	   LEAD(plan_id) OVER(PARTITION BY customer_id ORDER BY plan_id) AS next_plan
+FROM subscriptions
+)
+
+SELECT COUNT(*) AS downgraded
+FROM next_plan_cte
+WHERE start_date <= '2020-12-31'
+	AND plan_id = 2 AND next_plan = 1;
+```
+		 
+### Output:
+|downgrade|
+| -- |
+|0|
+		      
+* No customer has downgraded from pro monthly to basic monthly in 2020.
+	
+	
