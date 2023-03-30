@@ -1,14 +1,3 @@
--- 8 Week SQL Challenge: Case Study Questions
-
-/*
-Fi; a subscription-based business that offers a streaming service that only had food related content
-- something like Netflix but with only cooking shows!
-
-
-This case study is split into an initial data understanding question before diving straight into data  analysis questions before 
-finishing with 1 single extension challenge.
-*/
-
 -- A. Customer Journey
 
 /*Based off the 8 sample customers provided in the sample from the subscriptions table, write a brief

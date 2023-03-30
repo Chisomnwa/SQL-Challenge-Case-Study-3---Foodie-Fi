@@ -2,14 +2,9 @@
 
 D. Outside The Box Questions
 
-The following are open ended questions which might be asked during a technical interview for this case study - there 
-are no right or wrong answers, but answers that make sense from both a technical and a business perspective
-make an amazing impression!
-
-
 1. How would you calculate the rate of growth for Foodie-Fi?
 
-A: Calculating growth rate based on increase in numer of customers overtime
+A: Calculating growth rate based on increase in number of customers overtime
 
 To calculate the growth rate of Foodie-Fi, we need to determine the increase in the number of customers over a specific period of time.
 
@@ -111,7 +106,7 @@ Foodie-Fi to others, management can guage overall customer satisfaction and iden
 
 3. What are some key customer journeys or experiences that you would analyse further to improve customer retention?
 
-The key customer journeys or experiences that you would analyse further to improve customer retention are:
+The key customer journeys or experiences that I would analyse further to improve customer retention are:
 
 * Onboarding experience: The first few interactions a customer has with the Foodie-Fi platform can set the tone for their entire experience.
 Analysing how the users sign up, navigate through the platform, and discover content can help identify areas for improvement in the onboarding experience.

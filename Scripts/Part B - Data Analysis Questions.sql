@@ -82,8 +82,9 @@ ON e20.plan_id = e21.plan_id
 ORDER BY plan_id;
 
 /*
-The result shows there was no free trial in 2020. Maybe the old customers from 2020 continued with their subscriptions in 2021,
-customers upgraded from one paid trial to another, or customers signed up for paid plans without going through the trial plan.
+The result shows there was no free trial in 2020. Could it be that the old customers from 2020 continued with their 
+subscriptions in 2021, that customers upgraded from one paid trial to another, or that customers signed up 
+for paid plans without going through the trial plan?
 */
 
 
@@ -118,8 +119,8 @@ Steps:
 WITH cte_churn AS 
 (
 -- use lag function to look at the previous row in the plan_id column resulting in previous_plan column
-	SELECT *,
-	LAG(plan_id, 1) OVER(PARTITION BY customer_id ORDER BY plan_id) AS previous_plan
+SELECT *,
+	   LAG(plan_id, 1) OVER(PARTITION BY customer_id ORDER BY plan_id) AS previous_plan
 FROM subscriptions
 )
 SELECT COUNT(previous_plan) AS churn_count, 
@@ -242,6 +243,11 @@ LEFT JOIN plans p
 ON p.plan_id = pb.plan_id
 ORDER BY pb.plan_id;
 
+* On December 31, 2020, more people subscribed or upgraded to the pro monthly plan, but fewer people signed up
+for the trial plan. Could it be that some new customers signed up for paid plans immediately? If not, Foodie-Fi
+needs to scale up its marketing strategies for acquiring new sign-ups during this period as it's a holiday period,
+and as an entertainment platform, it's supposed to have more customers testing out the platform.
+
 
 -- 8. How many customers have upgraded to an annual plan in 2020?
 
@@ -306,6 +312,13 @@ FROM trial_plan tp
 JOIN annual_plan ap ON tp.customer_id = ap.customer_id
 WHERE ap.annual_date IS NOT NULL
 GROUP BY FLOOR(DATEDIFF(day, trial_date, annual_date) / 30);
+
+/*
+Upon further analysis, I discovered the following trends:
+
+* The majority of customers opt to subscribe or upgrade to an annual plan within the first 30 days.
+* A smaller percentage of customers make the decision to subscribe or upgrade after 210 days.
+* After 270 days, there is almost no customer activity in terms of purchasing a plan.
 
 
 -- 11. How many customers downgraded from a pro monthly to a basic monthly plan in 2020?
