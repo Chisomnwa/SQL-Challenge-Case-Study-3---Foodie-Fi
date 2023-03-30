@@ -379,10 +379,12 @@ period | total_customers | avg_days_to_upgrade
 300 - 330 days  | 1  | 327
 330 - 360 days  | 1  | 346
 
-After a further breakdown, I found out:
-* Most often customers subscribe or upgrade to an annual plan within 0–30 days.
-* Fewer customers do so after 210 days.
-* After 270 days, almost no customers buy.
+
+Upon further analysis, I discovered the following trends:
+
+* The majority of customers opt to subscribe or upgrade to an annual plan within the first 30 days.
+* A smaller percentage of customers make the decision to subscribe or upgrade after 210 days.
+* After 270 days, there is almost no customer activity in terms of purchasing a plan.
 
 ---
 
