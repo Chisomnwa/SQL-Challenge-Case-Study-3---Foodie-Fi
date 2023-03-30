@@ -388,7 +388,7 @@ Upon further analysis, I discovered the following trends:
 
 ---
 
-###  How many customers downgraded from a pro monthly to a basic monthly plan in 2020?
+###  11. How many customers downgraded from a pro monthly to a basic monthly plan in 2020?
 
 ### Steps:
 * Use the LEAD() function to get the next plan after their initial plan
