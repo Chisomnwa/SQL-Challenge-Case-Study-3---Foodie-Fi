@@ -24,10 +24,11 @@ Danny created Foodie-Fi with a data driven mindset and wanted to ensure all futu
 This case study focuses on using Foodie-Fi data; a subscription style digital data to answer important business questions that could help the startup have an insight of critical business metrics relating to the customer journey, payment transactions, and overall business performance.
    
    
+---
 ##
 Entity Relationship Diagram
 <p align="center" style="margin-bottom: 0px !important;">
-<img src="https://github.com/Chisomnwa/8-Week-SQL-Challenge-Case-Study--3-Foodie-Fi/blob/main/Images/ERD.png" width="540" height="540">
+<img src="https://github.com/Chisomnwa/8-Week-SQL-Challenge-Case-Study--3-Foodie-Fi/blob/main/Images/ERD.png">
    
    
    
