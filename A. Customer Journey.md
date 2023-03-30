@@ -59,19 +59,17 @@ customer_id | plan_id | plan_name | start_date
 
  - Customer 11 starts with free trial plan on 2020-11-19 and churns at the end of the free trial plan on 2020-11-26
 
-- Customer 13 starts with free trial plan on 2020-15-12 and when the trial ends subscribes to a basic monthly plan on the
+ - Customer 13 starts with free trial plan on 2020-15-12 and when the trial ends subscribes to a basic monthly plan on the
 2020-12-22, and 3 months later upgrades to a pro monthly plan on 2021-03-29
 
-Customer 15 starts with a free trial plan on 2020-03-17, and when the trail ends automatically upgrades to the pro monthly plan on
+ - Customer 15 starts with a free trial plan on 2020-03-17, and when the trail ends automatically upgrades to the pro monthly plan on
 2020-03-24 and then churns one month later on 2020-04-29
 
-Customer 16 starts with a free trial plan on 2020-05-31, and when the trial ends, subscribes to a basic monthly plan on 2020-06-07 
+ - Customer 16 starts with a free trial plan on 2020-05-31, and when the trial ends, subscribes to a basic monthly plan on 2020-06-07 
 and 4 months later upgrades to a pro annual plan on 2020-10-21
 
-Customer 18 starts with a free trial plan on 2020-07-06 and when the trial ends, automatically upgrades to pro monthly plan on
+ - Customer 18 starts with a free trial plan on 2020-07-06 and when the trial ends, automatically upgrades to pro monthly plan on
 the 2020-07-13
 
-Customer 19 starts with a free trial plan on 2020-06-22, automatically ugrades to pro monthly on 2020-06-29, and 2 months later
+ - Customer 19 starts with a free trial plan on 2020-06-22, automatically ugrades to pro monthly on 2020-06-29, and 2 months later
 upgrades to pro annual plan on 2020-08-29
-
-
