@@ -29,7 +29,7 @@ the WHERE clause. The data is then ordered by customer_id, plan_id, and payment_
 This column assigns a unique rank to each payment made by a customer for a specific plan.
 
 
-```
+```sql
 --Create payments_2020 table
 CREATE TABLE payments_2020 (
     payment_id INT IDENTITY(1,1) PRIMARY KEY,
@@ -42,7 +42,7 @@ CREATE TABLE payments_2020 (
 );
 ```
 
-```
+```sql
 --Insert payments data into payments_2020 table
 WITH join_table AS --create base table
 (
@@ -131,7 +131,7 @@ ORDER BY customer_id, plan_id, payment_date;
 ---
 
 --Confirming the values from the payment table
-```
+```sql
 SELECT *
 FROM payments_2020
 ```
