@@ -398,9 +398,9 @@ Upon further analysis, I discovered the following trends:
 -- To retrieve the next plan start_date located in the next row based on the current row
 WITH next_plan_cte AS (
 SELECT customer_id,
-	   plan_id,
-	   start_date,
-	   LEAD(plan_id) OVER(PARTITION BY customer_id ORDER BY plan_id) AS next_plan
+       plan_id,
+       start_date,
+       LEAD(plan_id) OVER(PARTITION BY customer_id ORDER BY plan_id) AS next_plan
 FROM subscriptions
 )
 
