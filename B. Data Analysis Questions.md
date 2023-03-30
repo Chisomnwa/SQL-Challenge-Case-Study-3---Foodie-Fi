@@ -19,7 +19,8 @@ FROM subscriptions;
 
 * Foodie-Fi has 1000 unique customers.
   
- 
+ ---
+	
 ### 2. What is the monthly distribution of trial plan start_date values for our dataset - use the start of the month as the group by value
 
 ### Steps:
@@ -56,6 +57,7 @@ ORDER BY COUNT(s.plan_id) DESC
 	
 * March has the highest number of trial plans, whereas February has the lowest number of trial plans.
   
+---
   
 ### 3. What plan start_date values occur after the year 2020 for our dataset? Show the breakdown by count of events for each plan_name
 
@@ -127,7 +129,8 @@ plan_id| event_2020 | event_2021
 The result shows there was no free trial in 2020. Maybe the old customers from 2020 continued with their subscriptions in 2021,
 customers upgraded from one paid trial to another, or customers signed up for paid plans without going through the trial plan.
 
-
+---
+	
 ### 4. What is the customer count and percentage of customers who have churned rounded to 1 decimal place?
 
 ### Steps:
@@ -150,6 +153,7 @@ customer_count | churn_percentage
 	
 * 307 customers, or 30.7% of the total customers, have churned from Food-fi during the period of analysis.
 
+---
 	
 ### 5. How many customers have churned straight after their initial free trial - what percentage is this rounded to the nearest whole number?
 
