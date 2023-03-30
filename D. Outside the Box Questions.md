@@ -21,7 +21,7 @@ and then calculate the rate of growth for each plan.
 *The SQL Code to calculate the growth rate is:*
 
 
-```
+```sql
 SELECT ((COUNT(DISTINCT current_customers) - COUNT(DISTINCT previous_customers)) / COUNT(DISTINCT previous_customers)) * 100 AS rate_of_growth
 FROM (
   SELECT COUNT(DISTINCT customer_id) AS current_customers, NULL AS previous_customers
@@ -36,7 +36,7 @@ FROM (
 
 *To calculate the growth rate for a particular plan:*
 
-```
+```sql
 SELECT ((COUNT(DISTINCT current_customers) - COUNT(DISTINCT previous_customers)) / COUNT(DISTINCT previous_customers)) * 100 AS rate_of_growth
 FROM (
   SELECT COUNT(DISTINCT customer_id) AS current_customers, NULL AS previous_customers
@@ -68,7 +68,7 @@ Explanation:
 * The outer query calculates the growth rate of revenue using the same formula as the original query: 
 ((current - previous) / previous) * 100.
 
-```
+```sql
 SELECT ((SUM(current_revenue) - SUM(previous_revenue)) / SUM(previous_revenue)) * 100 AS rate_of_growth
 FROM (
   SELECT SUM(p.price) AS current_revenue, NULL AS previous_revenue
@@ -85,7 +85,7 @@ FROM (
 
 ---
 
-### 2. What key metrics would you recommend Foodie-Fi management to track over time to assess performance of their overall business?
+### *2. What key metrics would you recommend Foodie-Fi management to track over time to assess performance of their overall business?*
 
 Some key metrics I would recommend Fodie-Fi management to track over time to assess the performance of their overall business are:
 
@@ -112,7 +112,7 @@ Foodie-Fi to others, management can guage overall customer satisfaction and iden
 
 ---
 
-### 3. What are some key customer journeys or experiences that you would analyse further to improve customer retention?
+### *3. What are some key customer journeys or experiences that you would analyse further to improve customer retention?*
 
 The key customer journeys or experiences that I would analyse further to improve customer retention are:
 
@@ -139,7 +139,7 @@ to improve customer retention and loyalty.
 
 ---
 
-### 4. If the Foodie-Fi team were to create an exit survey shown to customers who wish to cancel their subscription, what questions would you include
+### *4. If the Foodie-Fi team were to create an exit survey shown to customers who wish to cancel their subscription, what questions would you include*
 in the survey?
 
 If Foodie-Fi were to create an exit survey shown to customers who wish to cancel their subscription, some questions that could be included in the
@@ -158,7 +158,7 @@ survey are:
 
 ---
 
-### 5. What business levers could the Foodie-Fi team use to reduce the customer churn rate? How would you validate the effectiveness of your ideas?
+### *5. What business levers could the Foodie-Fi team use to reduce the customer churn rate? How would you validate the effectiveness of your ideas?*
 
 To reduce the customer churn rate, the Foodie-Fi team could use several business levers, such as:
 
