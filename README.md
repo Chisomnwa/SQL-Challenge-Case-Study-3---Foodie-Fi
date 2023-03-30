@@ -12,6 +12,7 @@
 - [Entity Relationship Diagram](#entity-relationship-diagram)
 - [Available Data](#available-data)
 - [Case Study Questions](#case-study-questions)
+- [Extra Resources](#extra-resources)
 
    
 ## Business Case
@@ -72,14 +73,11 @@ customer_id | plan_id | start_date
 19 | 3 | 2020-08-29 
 
   </details>
-   
-   
-   
-   
+
    
 ---
 ## Case Study Solutions
-- [Part A - Customer Jourbey](https://github.com/Chisomnwa/8-Week-SQL-Challenge-Case-Study--3-Foodie-Fi/blob/main/A.%20Customer%20Journey.md)
+- [Part A - Customer Journey](https://github.com/Chisomnwa/8-Week-SQL-Challenge-Case-Study--3-Foodie-Fi/blob/main/A.%20Customer%20Journey.md)
 - [Part B - Data Analysis Questions](https://github.com/Chisomnwa/8-Week-SQL-Challenge-Case-Study--3-Foodie-Fi/blob/main/B.%20Data%20Analysis%20Questions.md)
 - [Part C - Challenge Payment Questions](https://github.com/Chisomnwa/8-Week-SQL-Challenge-Case-Study--3-Foodie-Fi/blob/main/C.%20Challenge%20Payment%20Question.md)
 - [Part D - Outside the Box Questions](https://github.com/Chisomnwa/8-Week-SQL-Challenge-Case-Study--3-Foodie-Fi/blob/main/D.%20Outside%20the%20Box%20Questions.md)
@@ -89,4 +87,7 @@ customer_id | plan_id | start_date
  ## Extra Resources
  - [Medium Article]()
  - [Foodie-Fi Dashboard]()
+   
+   
+ # <p align="center" style="margin-top: 0px;">This was Fun! 🙌🥰😎
  
