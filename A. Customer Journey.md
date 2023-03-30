@@ -53,13 +53,13 @@ customer_id | plan_id | plan_name | start_date
 	
 ### Brief description on the customers journey based on the results from the above query:
 
-Customer 1 starts with a free trial plan on 2020-08-01 and when the trial ends, upgrades to basic monthly plan on 2020-08-08
+ - Customer 1 starts with a free trial plan on 2020-08-01 and when the trial ends, upgrades to basic monthly plan on 2020-08-08
 
-Customer 2 starts with a free trial plan on 2020-09-20 and when the trial ends, upgrades to pro annual plan on 2020-09-27
+ - Customer 2 starts with a free trial plan on 2020-09-20 and when the trial ends, upgrades to pro annual plan on 2020-09-27
 
-Customer 11 starts with free trial plan on 2020-11-19 and churns at the end of the free trial plan on 2020-11-26
+ - Customer 11 starts with free trial plan on 2020-11-19 and churns at the end of the free trial plan on 2020-11-26
 
-Customer 13 starts with free trial plan on 2020-15-12 and when the trial ends subscribes to a basic monthly plan on the
+- Customer 13 starts with free trial plan on 2020-15-12 and when the trial ends subscribes to a basic monthly plan on the
 2020-12-22, and 3 months later upgrades to a pro monthly plan on 2021-03-29
 
 Customer 15 starts with a free trial plan on 2020-03-17, and when the trail ends automatically upgrades to the pro monthly plan on
