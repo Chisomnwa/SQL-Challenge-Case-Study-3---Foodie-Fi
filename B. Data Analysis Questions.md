@@ -193,7 +193,7 @@ Question is asking for number and percentage of customers who converted to becom
 * Find the total number and percentage for each plan using COUNT
 * Filter for plan_id = 0 as every customer has to start from the trial plan at 0
 
-```
+```sql
 WITH cte_next_plan AS
 (
 	SELECT *,
@@ -233,4 +233,66 @@ churn | 92 | 9.2
 
 * More than 80% of customers are on paid plans,a with small 3.7% on plan 3 (pro annual $199). Foodie-fi has to restrategize on 
 their customer acquisition strategy for customers who would be willing to spend more.
+
+---
+
+### 7. What is the customer count and percentage breakdown of all 5 plan_name values at 2020-12-31?
+
+### Steps:
+* Use LEAD() function to retrieve the next plan start_date located in the next row based on the curent row
+* Find the breakdown of customers with existing plans on or after 2020-12-31
+
+```sql
+WITH cte_next_date AS (
+SELECT *,
+       LEAD(start_date, 1) OVER(PARTITION BY customer_id ORDER BY start_date) AS next_date
+FROM subscriptions
+WHERE start_date <= '2020-12-31'
+),
+
+plans_breakdown AS (
+SELECT plan_id,
+       CAST(COUNT(DISTINCT customer_id) as FLOAT) total,
+       CAST((SELECT COUNT(DISTINCT customer_id) FROM subscriptions) AS float) total_all
+FROM cte_next_date c
+WHERE next_date IS NULL
+GROUP BY plan_id
+)
+
+SELECT p.plan_name, 
+       pb.total, 
+       ROUND(pb.total / pb.total_all * 100, 1) percentage
+FROM plans_breakdown pb
+LEFT JOIN plans p 
+ON p.plan_id = pb.plan_id
+ORDER BY pb.plan_id;
+```
+
+### Ouptut:
+plan_name | total | percentage
+-- | -- | --
+trial | 19 | 1.9
+basic monthly | 224 | 22.4
+pro monthly | 326 | 32.6
+pro annual | 195 | 19.5
+churn | 236 | 23.6	 
+		   
+* On December 31, 2020, more people subscribed or upgraded to the pro monthly plan, but fewer people signed up for the trial plan. Could it be that some new customers signed up for paid plans immediately? If not, Foodie-Fi needs to scale up its marketing strategies for acquiring new sign-ups during this period as it's a holiday period, and as an entertainment platform, it's supposed to have more customers testing out the platform.
+
+---
+
+### 8. How many customers have upgraded to an annual plan in 2020?
+
+```sql
+SELECT COUNT(DISTINCT customer_id) AS unique_customers
+FROM Subscriptions s
+WHERE plan_id = 3 AND start_date <= '2020-12-31'
+```
+
+### Output:
+|total_customers|
+| -- |
+|195|
+
+* 195 customers upgraded to an annual plan in 2020
 
