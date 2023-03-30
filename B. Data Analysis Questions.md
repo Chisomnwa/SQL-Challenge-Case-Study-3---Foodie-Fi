@@ -146,7 +146,6 @@ WHERE plan_id = 4;
 ```
 
 ### Output:
-#### Answer:
 customer_count | churn_percentage
 -- | --
 307 | 30.7
@@ -168,7 +167,8 @@ customer_count | churn_percentage
 WITH cte_churn AS 
 (
 -- use lag function to look at the previous row in the plan_id column resulting in previous_plan column
-	SELECT *, LAG(plan_id, 1) OVER(PARTITION BY customer_id ORDER BY plan_id) AS previous_plan
+SELECT *, 
+       LAG(plan_id, 1) OVER(PARTITION BY customer_id ORDER BY plan_id) AS previous_plan
 FROM subscriptions
 )
 SELECT COUNT(previous_plan) AS churn_count, 
@@ -178,7 +178,59 @@ WHERE plan_id = 4 and previous_plan = 0;
 ```
 
 ### Ouput:
-#### Answer:
 churn_count | percentage_churn
 -- | --
 92 | 9
+	
+---
+
+### 6. What is the number and percentage of customer plans after their initial free trial?
+
+Question is asking for number and percentage of customers who converted to becoming paid customer after the trial. 
+
+### Steps:
+* Find out customer's next plan which is located in the next row using LEAD() function
+* Find the total number and percentage for each plan using COUNT
+* Filter for plan_id = 0 as every customer has to start from the trial plan at 0
+
+```
+WITH cte_next_plan AS
+(
+	SELECT *,
+	       LEAD(plan_id, 1) OVER (PARTITION BY customer_id ORDER BY plan_id) AS next_plan
+	FROM subscriptions
+),
+
+planning AS --create number and percentage
+(
+    SELECT c.next_plan,
+           COUNT(DISTINCT customer_id) AS customer_count,
+           (100 * CAST(COUNT(DISTINCT customer_id) AS FLOAT) / (SELECT COUNT(DISTINCT customer_id) FROM subscriptions)) AS percentage
+    FROM cte_next_plan c
+	LEFT JOIN plans p 
+	ON p.plan_id = c.next_plan
+	WHERE c.plan_id = 0 
+		AND c.next_plan is not null
+	GROUP BY c.next_plan
+	)
+
+SELECT p.plan_name, 
+	   s.customer_count, 
+	   s.percentage
+FROM planning s
+LEFT JOIN plans p 
+ON p.plan_id = s.next_plan;
+```
+
+### Output:
+plan_name | customer_count | percentage
+-- | -- | --
+basic monthly | 546 | 54.6
+pro monthly | 325 | 32.5
+pro annual | 37 | 3.7
+churn | 92 | 9.2
+
+
+* More than 80% of customers are on paid plans,a with small 3.7% on plan 3 (pro annual $199). Foodie-fi has to restrategize on 
+their customer acquisition strategy for customers who would be willing to spend more.
+
