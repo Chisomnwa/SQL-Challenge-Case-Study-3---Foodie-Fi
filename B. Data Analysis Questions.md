@@ -123,8 +123,58 @@ plan_id| event_2020 | event_2021
 3 | 195 | 63
 4 | 236 | 71
 
+
 The result shows there was no free trial in 2020. Maybe the old customers from 2020 continued with their subscriptions in 2021,
 customers upgraded from one paid trial to another, or customers signed up for paid plans without going through the trial plan.
 
-	A
 
+### 4. What is the customer count and percentage of customers who have churned rounded to 1 decimal place?
+
+### Steps:
+* Count the total number of customers
+* Get the percentage of customers by diving total customers with distinct number of customers and round it to 1 decimal place.
+* Filter for where the plan_id is 4 which is Trial
+
+```sql
+SELECT COUNT(*) AS customer_count,
+	   ROUND((CAST(COUNT(*) AS FLOAT) / (SELECT COUNT(DISTINCT customer_id) FROM  subscriptions)) * 100, 1) AS churn_percentage
+FROM subscriptions
+WHERE plan_id = 4;
+```
+
+### Output:
+#### Answer:
+customer_count | churn_percentage
+-- | --
+307 | 30.7
+	
+* 307 customers, or 30.7% of the total customers, have churned from Food-fi during the period of analysis.
+
+	
+### 5. How many customers have churned straight after their initial free trial - what percentage is this rounded to the nearest whole number?
+
+### Steps:
+* use lag function to create a new column called "previous_plan" which stores the plan_id of the previous
+  subscription plan for each customer.	
+* get the total number of rows in the previous_plan column
+* get the perecentage of customers and round to the nearest whole number
+* Using the cte_churn CTE, filter for rows with plan_id of 4 (churn_plan) and previous_plan of 0(trial plan)
+
+```sql
+WITH cte_churn AS 
+(
+-- use lag function to look at the previous row in the plan_id column resulting in previous_plan column
+	SELECT *, LAG(plan_id, 1) OVER(PARTITION BY customer_id ORDER BY plan_id) AS previous_plan
+FROM subscriptions
+)
+SELECT COUNT(previous_plan) AS churn_count, 
+	   ROUND(COUNT(*) * 100 / (SELECT COUNT(DISTINCT customer_id) FROM subscriptions), 0) AS percentage_churn
+FROM cte_churn
+WHERE plan_id = 4 and previous_plan = 0;
+```
+
+### Ouput:
+#### Answer:
+churn_count | percentage_churn
+-- | --
+92 | 9
