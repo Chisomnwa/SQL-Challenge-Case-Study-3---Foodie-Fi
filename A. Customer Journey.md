@@ -14,7 +14,8 @@ want to run some sort of join to make your explanations a bit easier!*
 
 - Order by Customer_id
 
-```--selecting the unique customers based on the sample from the subscriptions table
+```sql
+--selecting the unique customers based on the sample from the subscriptions table
 SELECT s.customer_id,
 	   p.plan_id, 
 	   p.plan_name, 
