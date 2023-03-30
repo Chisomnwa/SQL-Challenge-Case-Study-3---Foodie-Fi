@@ -65,7 +65,7 @@ Question is asking for the number of plans for start dates occurring in 2021 and
 * Filter plans with start_dates occurring after 2020-12-31
 * Group and order results by plan.
 
-```
+```sql
 SELECT p.plan_name, 
 	   p.plan_id,
 	   COUNT(*) AS event_2021
@@ -85,10 +85,11 @@ pro monthly | 2 | 60
 pro annual | 3 | 63
 churn | 4 | 71
 	
+	
 * The result above showed that there was no trial plan recorded in 2021 and I was curious and ran the below query for 2020 and 2021 so I could understand the year-on-year results.
 
 
-```
+```sql
 WITH events_2020 AS 
 (
 SELECT plan_id,
