@@ -1,6 +1,6 @@
 # 🥑 Case Study #3 - Foodie-Fi 
 
-<img src="https://user-images.githubusercontent.com/43850912/143991760-d160dbfd-14c3-40c8-8c1a-823716f6ef8e.png" width="540" height="540">
+<img src="https://github.com/Chisomnwa/8-Week-SQL-Challenge-Case-Study--3-Foodie-Fi/blob/main/Foodie-Fi%20Photo.png" width="540" height="540">
 
 ## 🧾 Table of Contents
 - [Business Case](#business-case)
@@ -9,3 +9,5 @@
 - [Case Study Questions](#case-study-questions)
 
 - Solution 
+ - GitHub
+ 
