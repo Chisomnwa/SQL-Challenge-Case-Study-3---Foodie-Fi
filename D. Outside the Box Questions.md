@@ -2,7 +2,7 @@
 ## <p align="center"> D. Outside the Box Questions
 
 
-### 1. How would you calculate the rate of growth for Foodie-Fi?
+### *1. How would you calculate the rate of growth for Foodie-Fi?*
 
 #### A: Calculating growth rate based on increase in number of customers overtime
 
