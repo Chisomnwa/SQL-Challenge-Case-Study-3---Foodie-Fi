@@ -86,9 +86,7 @@ customer_id | plan_id | start_date
  ---
  ## Extra Resources
  - [Medium Article]()
- - [Foodie-Fi Dashboard]()
- 
-*I took a step further to provide key recommendations to Foodie-Fi at the end of my analysis, adn these recommendations aare provided in the Dashboard link provided above.*
+ - [Foodie-Fi Dashboard and Key Recommendations]()
    
    
  # <p align="center" style="margin-top: 0px;">This was Fun! 🙌🥰😎
