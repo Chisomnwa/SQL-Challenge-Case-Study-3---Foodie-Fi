@@ -128,10 +128,32 @@ WHERE YEAR(payment_date) = 2020
 ORDER BY customer_id, plan_id, payment_date;
 ```
 
----
 
 --Confirming the values from the payment table
 ```sql
 SELECT *
 FROM payments_2020
 ```
+
+### Output:
+***NOTE*** : *Not all output is displayed, considering the number of results and will take up space*
+customer_id | plan_id | plan_name | payment_date | amount | payment_order
+--| -- | -- | -- | -- | --
+1 | 1 | basic monthly | 2020-08-08 | 9.90 | 1
+1 | 1 | basic monthly | 2020-09-08 | 9.90 | 2
+1 | 1 | basic monthly | 2020-10-08 | 9.90 | 3
+1 | 1 | basic monthly | 2020-11-08 | 9.90 | 4
+1 | 1 | basic monthly | 2020-12-08 | 9.90 | 5
+2 | 3 | pro annual | 2020-09-27 | 199.00 | 1
+… | … | … | … |… |…
+19 | 2 | pro monthly | 2020-06-29 | 19.90 | 1
+19 | 2 | pro monthly | 2020-07-29 | 19.90 | 2
+19 | 3 | pro annual | 2020-08-29 | 199.00 | 3
+20 | 1 | basic monthly | 2020-04-15 | 9.90 | 1
+20 | 1 | basic monthly | 2020-05-15 | 9.90 | 2
+20 | 3 | pro annual | 2020-06-05 | 199.00 | 3
+… |… | … | … |… |…
+1000 | 2 | pro monthly | 2020-03-26 | 19.90 | 1
+1000 | 2 | pro monthly | 2020-04-26 | 19.90 | 2
+1000 | 2 | pro monthly | 2020-05-26 | 19.90 | 3
+				    
