@@ -85,8 +85,8 @@ customer_id | plan_id | start_date
    
  ---
  ## Extra Resources
- - [Medium Article]()
- - [Foodie-Fi Dashboard and Key Recommendations]()
+ - [Medium Article](https://medium.com/@chisompromise/analyzing-subscription-style-digital-data-foodie-fi-f82031f93d09)
+ - [Foodie-Fi Dashboard and Key Recommendations](https://www.novypro.com/project/business-performance-dashboard--foodie-fi)
    
    
  # <p align="center" style="margin-top: 0px;">This was Fun! 🙌🥰😎
