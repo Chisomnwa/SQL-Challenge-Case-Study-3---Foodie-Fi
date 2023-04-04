@@ -129,7 +129,7 @@ SELECT
 	plan_name,
 	payment_date,
 	amount,
-	RANK() OVER(PARTITION BY customer_id ORDER BY customer_id, plan_id, payment_date) payment_order
+	RANK() OVER(PARTITION BY customer_id ORDER BY customer_id, plan_id, payment_date) AS payment_order
 FROM Date_CTE
 WHERE YEAR(payment_date) = 2020
 ORDER BY customer_id, plan_id, payment_date;
