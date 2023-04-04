@@ -54,13 +54,13 @@ CREATE TABLE payments_2020 (
 WITH join_table AS --create base table
 (
 	SELECT 
-	  s.customer_id,
+	        s.customer_id,
 		s.plan_id,
 		p.plan_name,
-		s.start_date payment_date,
+		s.start_date AS payment_date,
 		s.start_date,
-		LEAD(s.start_date, 1) OVER(PARTITION BY s.customer_id ORDER BY s.start_date, s.plan_id) next_date,
-		p.price amount
+		LEAD(s.start_date, 1) OVER(PARTITION BY s.customer_id ORDER BY s.start_date, s.plan_id) AS next_date,
+		p.price AS amount
 	FROM subscriptions s
 	LEFT JOIN plans p 
 	ON p.plan_id = s.plan_id
@@ -74,10 +74,10 @@ new_join AS --filter table (deselect trial and churn)
 		plan_name,
 		payment_date,
 		start_date,
-		CASE WHEN next_date IS NULL or next_date > '20201231' THEN '20201231' else next_date end next_date,
+		CASE WHEN next_date IS NULL or next_date > '20201231' THEN '20201231' ELSE next_date END next_date,
 		amount
 	FROM join_table
-	WHERE plan_name not in ('trial', 'churn')
+	WHERE plan_name NOT IN ('trial', 'churn')
 ),
 
 new_join1 AS --add new column, 1 month before next_date
@@ -89,7 +89,7 @@ new_join1 AS --add new column, 1 month before next_date
 		payment_date,
 		start_date,
 		next_date,
-		DATEADD(MONTH, -1, next_date) next_date1,
+		DATEADD(MONTH, -1, next_date) AS next_date1,
 		amount
 	FROM new_join
 ),
@@ -114,12 +114,12 @@ Date_CTE  AS --recursive function (for payment_date)
 		plan_id,
 		plan_name,
 		start_Date, 
-		DATEADD(M, 1, payment_date) payment_date,
+		DATEADD(M, 1, payment_date) AS payment_date,
 		next_date, 
 		next_date1,
 		amount
 	FROM Date_CTE b
-	WHERE payment_date < next_date1 and plan_id != 3
+	WHERE payment_date < next_date1 AND plan_id != 3
 )
 
 INSERT INTO payments_2020 (customer_id, plan_id, plan_name, payment_date, amount, payment_order)
