@@ -58,10 +58,10 @@ WITH join_table AS --create base table
 	    s.customer_id,
 		s.plan_id,
 		p.plan_name,
-		s.start_date payment_date,
+		s.start_date AS payment_date,
 		s.start_date,
-		LEAD(s.start_date, 1) OVER(PARTITION BY s.customer_id ORDER BY s.start_date, s.plan_id) next_date,
-		p.price amount
+		LEAD(s.start_date, 1) OVER(PARTITION BY s.customer_id ORDER BY s.start_date, s.plan_id) AS next_date,
+		p.price AS amount
 	FROM subscriptions s
 	LEFT JOIN plans p 
 	ON p.plan_id = s.plan_id
@@ -75,10 +75,10 @@ new_join AS --filter table (deselect trial and churn)
 		plan_name,
 		payment_date,
 		start_date,
-		CASE WHEN next_date IS NULL or next_date > '20201231' THEN '20201231' else next_date end next_date,
+		CASE WHEN next_date IS NULL or next_date > '20201231' THEN '20201231' ELSE next_date END next_date,
 		amount
 	FROM join_table
-	WHERE plan_name not in ('trial', 'churn')
+	WHERE plan_name NOT IN ('trial', 'churn')
 ),
 
 new_join1 AS --add new column, 1 month before next_date
@@ -90,7 +90,7 @@ new_join1 AS --add new column, 1 month before next_date
 		payment_date,
 		start_date,
 		next_date,
-		DATEADD(MONTH, -1, next_date) next_date1,
+		DATEADD(MONTH, -1, next_date) AS next_date1,
 		amount
 	FROM new_join
 ),
@@ -102,7 +102,7 @@ Date_CTE  AS --recursive function (for payment_date)
 		plan_id,
 		plan_name,
 		start_Date,
-		payment_date = (select top 1 start_Date FROM new_join1 where customer_id = a.customer_id and plan_id = a.plan_id),
+		payment_date = (SELECT TOP 1 start_Date FROM new_join1 WHERE customer_id = a.customer_id AND plan_id = a.plan_id),
 		next_date, 
 		next_date1,
 		amount
@@ -115,12 +115,12 @@ Date_CTE  AS --recursive function (for payment_date)
 		plan_id,
 		plan_name,
 		start_Date, 
-		DATEADD(M, 1, payment_date) payment_date,
+		DATEADD(M, 1, payment_date) AS payment_date,
 		next_date, 
 		next_date1,
 		amount
 	FROM Date_CTE b
-	WHERE payment_date < next_date1 and plan_id != 3
+	WHERE payment_date < next_date1 AND plan_id != 3
 )
 
 INSERT INTO payments_2020 (customer_id, plan_id, plan_name, payment_date, amount, payment_order)
@@ -130,7 +130,7 @@ SELECT
 	plan_name,
 	payment_date,
 	amount,
-	RANK() OVER(PARTITION BY customer_id ORDER BY customer_id, plan_id, payment_date) payment_order
+	RANK() OVER(PARTITION BY customer_id ORDER BY customer_id, plan_id, payment_date) AS payment_order
 FROM Date_CTE
 WHERE YEAR(payment_date) = 2020
 ORDER BY customer_id, plan_id, payment_date;
